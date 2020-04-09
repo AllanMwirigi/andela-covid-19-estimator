@@ -26,9 +26,6 @@
     "jest": "^25.2.0",
     "nodemon": "^2.0.2"
   },
-  "engines": {
-    "node": "10.x"
-  },
   "browserslist": [
     "last 1 Chrome versions"
   ]
