@@ -16,9 +16,8 @@ function computeImpact(currentlyInfected, data) {
 
   const factor = Math.floor(days / 3);
   const infectionsByRequestedTime = currentlyInfected * (2 ** factor);
-  const severeCasesByRequestedTime = Math.floor(0.15 * infectionsByRequestedTime);
-  const temp1 = (0.35 * totalHospitalBeds) - severeCasesByRequestedTime;
-  const hospitalBedsByRequestedTime = Math.floor(temp1);
+  const severeCasesByRequestedTime = 0.15 * infectionsByRequestedTime;
+  const hospitalBedsByRequestedTime = (0.35 * totalHospitalBeds) - severeCasesByRequestedTime;
   const casesForICUByRequestedTime = 0.05 * infectionsByRequestedTime;
   const casesForVentilatorsByRequestedTime = 0.02 * infectionsByRequestedTime;
 
