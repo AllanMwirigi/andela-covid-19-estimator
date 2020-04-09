@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const controllers = require('./src/controllers');
+require('dotenv').config();
 
 const app = express();
 
@@ -29,8 +30,11 @@ app.get('/api/v1/on-covid19/logs', controllers.getLogs);
 // app.get('/api/v1/on-covid-19/xml', controllers.getXML);
 
 // port  // heroku will set PORT env var to 80
-const PORT = process.env.PORT || 5000;
-app.listen(PORT).on('listening', () => {});
+if (process.env.NODE_ENV === 'development') {
+  app.listen(process.env.PORT).on('listening', () => {});
+} else {
+  app.listen(process.env.PORT, process.env.HOST_IP).on('listening', () => {});
+}
 
 // custom error handling middleware i.e. for errors passed in next()
 app.use((err, req, res, next) => {

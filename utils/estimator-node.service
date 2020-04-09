@@ -1,0 +1,17 @@
+[Unit]
+Description=Covid-19 Estimator Backend service
+Documentation=https://example.com
+After=network.target
+#if supposed to start our app when the machine boots up, it should wait until after the main networking functionality of the server is online to do so
+
+[Service]
+#Environment=NODE_ENV=production PORT=4000
+Type=simple
+User=allan
+ExecStart=/usr/bin/node /home/allan/andela-covid-19-estimator/app.js
+Restart=on-failure
+# Restart service after 10 seconds if node service crashes
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
