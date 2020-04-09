@@ -12,7 +12,8 @@ function computeImpact(currentlyInfected, data) {
     days = duration * 30;
   }
 
-  const { avgDailyIncomePopulation, avgDailyIncomeInUSD, totalHospitalBeds } = data;
+  const { region, totalHospitalBeds } = data;
+  const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = region;
 
   const factor = Math.floor(days / 3);
   const infectionsByRequestedTime = currentlyInfected * (2 ** factor);
@@ -21,10 +22,11 @@ function computeImpact(currentlyInfected, data) {
   const beds = (0.35 * totalHospitalBeds) - severeCasesByRequestedTime;
   const hospitalBedsByRequestedTime = Math.trunc(beds);
 
-  const casesForICUByRequestedTime = 0.05 * infectionsByRequestedTime;
-  const casesForVentilatorsByRequestedTime = 0.02 * infectionsByRequestedTime;
+  const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
 
   const d = infectionsByRequestedTime * avgDailyIncomePopulation * avgDailyIncomeInUSD * days;
+  const dollarsInFlight = d;
 
   const output = {
     currentlyInfected,
@@ -33,7 +35,7 @@ function computeImpact(currentlyInfected, data) {
     hospitalBedsByRequestedTime,
     casesForICUByRequestedTime,
     casesForVentilatorsByRequestedTime,
-    dollarsInFlight: d
+    dollarsInFlight
   };
   return output;
 }
