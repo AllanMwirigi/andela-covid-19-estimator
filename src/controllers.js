@@ -41,7 +41,7 @@ exports.getLogs = (req, res) => {
   // res.status(200);
   // res.sendFile(`${appRoot}/logs/app.log`);
   const text = fs.readFileSync(`${appRoot}/logs/app.log`, 'utf8');
-  res.status(200).send(text);
+  res.status(200).set('Content-Type', 'text/plain').send(text);
 };
 
 exports.getXML = (req, res) => {
