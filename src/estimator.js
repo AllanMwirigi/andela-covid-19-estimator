@@ -25,8 +25,9 @@ function computeImpact(currentlyInfected, data) {
   const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
 
-  const d = infectionsByRequestedTime * avgDailyIncomePopulation * avgDailyIncomeInUSD * days;
-  const dollarsInFlight = d;
+  // const d = infectionsByRequestedTime * avgDailyIncomePopulation * avgDailyIncomeInUSD * days;
+  const d = (infectionsByRequestedTime * avgDailyIncomePopulation * avgDailyIncomeInUSD) / days;
+  const dollarsInFlight = Math.trunc(d);
 
   const output = {
     currentlyInfected,
