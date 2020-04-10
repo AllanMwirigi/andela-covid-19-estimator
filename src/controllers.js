@@ -1,8 +1,6 @@
 
-// import covid19ImpactEstimator from './estimator';
-// import xml from 'xml';
-
 const path = require('path');
+const fs = require('fs');
 const covid19ImpactEstimator = require('./estimator');
 const xmlParser = require('../utils/fast-xml-parser');
 
@@ -40,8 +38,10 @@ exports.evalCovidXML = (req, res, next) => {
 };
 
 exports.getLogs = (req, res) => {
-  res.status(200);
-  res.sendFile(`${appRoot}/logs/app.log`);
+  // res.status(200);
+  // res.sendFile(`${appRoot}/logs/app.log`);
+  const text = fs.readFileSync(`${appRoot}/logs/app.log`, 'utf8');
+  res.status(200).set('Content-Type', 'text/plain').send(text);
 };
 
 exports.getXML = (req, res) => {
