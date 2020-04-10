@@ -27,6 +27,11 @@ app.post('/api/v1/on-covid-19', controllers.evalCovidJSON);
 app.post('/api/v1/on-covid-19/json', controllers.evalCovidJSON);
 app.post('/api/v1/on-covid-19/xml', controllers.evalCovidXML);
 app.get('/api/v1/on-covid19/logs', controllers.getLogs);
+app.get('/api/v1/logs', controllers.getLogs);
+app.get('/api/logs', controllers.getLogs);
+app.get('/logs', controllers.getLogs);
+
+
 // app.get('/api/v1/on-covid-19/xml', controllers.getXML);
 
 // port  // heroku will set PORT env var to 80
