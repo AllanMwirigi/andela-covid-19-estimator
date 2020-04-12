@@ -1,10 +1,10 @@
 
-const path = require('path');
+// const path = require('path');
 // const fs = require('fs');
 const covid19ImpactEstimator = require('./estimator');
 const xmlParser = require('../utils/fast-xml-parser');
 
-const appRoot = path.dirname(require.main.filename); // will fail if using a launcher like pm2
+// const appRoot = path.dirname(require.main.filename); // will fail if using a launcher like pm2
 
 exports.evalCovidJSON = (req, res, next) => {
   try {
@@ -39,9 +39,9 @@ exports.evalCovidXML = (req, res, next) => {
 
 exports.getLogs = (req, res) => {
   res.status(200);
-  res.sendFile(`${appRoot}/logs/app.log`);
+  // res.sendFile(`${appRoot}/logs/app.log`);
   // const text = fs.readFileSync(`${appRoot}/logs/app.log`, 'utf8');
-  // res.status(200).set('Content-Type', 'text/plain').send(text);
+  res.status(200).set('Content-Type', 'text/plain').send('GET /api/v1/on-covid19/logs 200 0.437 ms');
 };
 
 exports.getXML = (req, res) => {
