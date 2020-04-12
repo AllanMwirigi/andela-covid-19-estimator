@@ -15,7 +15,7 @@ const writeStream = fs.createWriteStream(path.join(__dirname, '/logs/app.log'), 
 // logging
 // app.use(morgan('dev'));
 // app.use(morgan('tiny', { stream: winston.stream }));
-const logFormat = ':method \t :url \t :status \t :response-time ms';
+const logFormat = '":method \t :url \t :status \t :response-time ms"';
 app.use(morgan(logFormat, { stream: writeStream }));
 
 // parse request bodies //support nested json
