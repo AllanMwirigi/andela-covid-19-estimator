@@ -42,8 +42,9 @@ exports.getLogs = (req, res) => {
   res.sendFile(`${appRoot}/logs/app.log`);
   // const text = fs.readFileSync(`${appRoot}/logs/app.log`, 'utf8');
   // res.status(200).set('Content-Type', 'text/plain').send(text);
-  const t = 'GET /api/v1/on-covid-19/logs 200 45ms\n';
-  res.status(200).set('Content-Type', 'text/plain').send(t.repeat(4));
+
+  // const t = 'GET /api/v1/on-covid-19/logs 200 45ms\n';
+  // res.status(200).set('Content-Type', 'text/plain').send(t.repeat(4));
 };
 
 exports.getXML = (req, res) => {
