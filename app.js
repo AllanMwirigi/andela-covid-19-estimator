@@ -2,26 +2,26 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-// const fs = require('fs');
-// const path = require('path');
+const fs = require('fs');
+const path = require('path');
 
-const winston = require('./utils/winston');
+// const winston = require('./utils/winston');
 const controllers = require('./src/controllers');
 require('dotenv').config();
 
 const app = express();
 
 // create a write stream (in append mode)
-// const writeStream = fs.createWriteStream(
-//   path.join(__dirname, '/logs/app.log'), { flags: 'a', encoding: 'utf8' }
-// );
+const writeStream = fs.createWriteStream(
+  path.join(__dirname, '/logs/app.log'), { flags: 'a', encoding: 'utf8' }
+);
 
 // logging
 // app.use(morgan('dev'));
 // app.use(morgan('tiny', { stream: winston.stream }));
 const logFormat = ':method \t :url \t :status \t :response-time ms';
-// app.use(morgan(logFormat, { stream: writeStream }));
-app.use(morgan(logFormat, { stream: winston.stream }));
+app.use(morgan(logFormat, { stream: writeStream }));
+// app.use(morgan(logFormat, { stream: winston.stream }));
 
 // parse request bodies //support nested json
 app.use(bodyParser.urlencoded({ extended: false }));
