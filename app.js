@@ -19,7 +19,7 @@ const writeStream = fs.createWriteStream(
 // logging
 // app.use(morgan('dev'));
 // app.use(morgan('tiny', { stream: winston.stream }));
-const logFormat = ':method\t\t:url\t\t:status\t\t:response-timems';
+const logFormat = ':method\t\t:url\t\t:status\t\t:response-time ms';
 app.use(morgan(logFormat, { stream: writeStream }));
 // app.use(morgan(logFormat, { stream: winston.stream }));
 
