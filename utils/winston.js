@@ -7,17 +7,17 @@ const appRoot = path.dirname(require.main.filename); // will fail if using a lau
 // configs for winston transports i.e. file and console
 const options = {
   file: {
-    level: 'info',
+    // level: 'info',
     filename: `${appRoot}/logs/app.log`,
-    handleExceptions: true,
+    handleExceptions: false,
     json: false,
     maxsize: 5242880, // 5MB
     maxFiles: 5,
     colorize: false
   },
   console: {
-    level: 'debug',
-    handleExceptions: true,
+    // level: 'debug',
+    handleExceptions: false,
     json: false,
     colorize: true
   }
@@ -36,7 +36,7 @@ const logger = winston.createLogger({
 logger.stream = {
   write(message) {
     // use the 'info' log level so the output will be picked up by both transports(file and console)
-    logger.info(message);
+    logger.log(`${message}ms`);
   }
 };
 

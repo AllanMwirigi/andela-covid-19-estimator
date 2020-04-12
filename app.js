@@ -19,8 +19,15 @@ const writeStream = fs.createWriteStream(
 // logging
 // app.use(morgan('dev'));
 // app.use(morgan('tiny', { stream: winston.stream }));
-const logFormat = ':method\t\t:url\t\t:status\t\t:response-time ms';
-app.use(morgan(logFormat, { stream: writeStream }));
+const logFormat = ':method\t\t:url\t\t:status\t\t:response-time';
+app.use(morgan(logFormat, {
+  stream: {
+    write(message) {
+    // use the 'info' log level so the output will be picked up by both transports(file and console)
+      writeStream.write(`${message.substring(0, message.indexOf('\n'))}ms\n`);
+    }
+  }
+}));
 // app.use(morgan(logFormat, { stream: winston.stream }));
 
 // parse request bodies //support nested json

@@ -8,6 +8,7 @@ const appRoot = path.dirname(require.main.filename); // will fail if using a lau
 
 exports.evalCovidJSON = (req, res, next) => {
   try {
+    // console.dir(req);
     const data = req.body;
     if (data == null) {
       res.sendStatus(400); return;
