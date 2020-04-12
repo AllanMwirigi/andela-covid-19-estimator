@@ -19,12 +19,21 @@ const writeStream = fs.createWriteStream(
 // logging
 // app.use(morgan('dev'));
 // app.use(morgan('tiny', { stream: winston.stream }));
-const logFormat = ':method\t\t:url\t\t:status\t\t:response-time';
+const logFormat = ':method\t:url\t:status\t:response-time';
 app.use(morgan(logFormat, {
   stream: {
     write(message) {
-    // use the 'info' log level so the output will be picked up by both transports(file and console)
-      writeStream.write(`${message.substring(0, message.indexOf('\n'))}ms\n`);
+      const finalIndex = message.length - 1;
+      const lastTabIndex = message.lastIndexOf('\t');
+      const str = message.substring(lastTabIndex + 1, finalIndex);
+      let time = Math.ceil(parseFloat(str));
+      if (time < 10) {
+        time = `0${time.toString()}`;
+      } else {
+        time = time.toString();
+      }
+      const msg = `${message.substring(0, lastTabIndex + 1)}${time}ms\n`;
+      writeStream.write(msg);
     }
   }
 }));
