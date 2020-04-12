@@ -10,7 +10,7 @@ require('dotenv').config();
 const app = express();
 
 // create a write stream (in append mode)
-const writeStream = fs.createWriteStream(path.join(__dirname, '/logs/app.log'), { flags: 'a' });
+const writeStream = fs.createWriteStream(path.join(__dirname, '/logs/app.log'), { flags: 'a', encoding: 'utf8' });
 
 // logging
 // app.use(morgan('dev'));
